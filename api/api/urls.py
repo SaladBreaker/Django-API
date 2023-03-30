@@ -21,13 +21,13 @@ from .views import (
     EmployeeGetView,
     EmployeePostView,
     EmployeePutView,
-    EmployeeDeleteView,
+    EmployeeDeleteView, EmployeesAverageAgePerIndustry, EmployeesAverageSalaryPerIndustry,
+    EmployeesAverageSalaryPerYearsOfExperience, EmployeesAverageSalaryPerGender, EmployeesAverageAgePerGender,
 )
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     # Employee
-    # TODO why /<verb> and not directly /
     path("employees/", EmployeeListView.as_view(), name="employees-list"),
     path("employees/<int:id>/", EmployeeGetView.as_view(), name="employees-get"),
     path(
@@ -45,4 +45,31 @@ urlpatterns = [
         EmployeeDeleteView.as_view(http_method_names=["delete"]),
         name="employees-delete",
     ),
+
+    # Analytical Endpoints
+    path(
+        "analytical/employees-average-age-per-industry",
+        EmployeesAverageAgePerIndustry.as_view(),
+        name="employees-average-age-per-industry"
+    ),
+    path(
+        "analytical/employees-average-salary-per-industry",
+        EmployeesAverageSalaryPerIndustry.as_view(),
+        name="employees-average-salary-per-industry"
+    ),
+    path(
+        "analytical/employees-average-salary-per-years-of-experience",
+        EmployeesAverageSalaryPerYearsOfExperience.as_view(),
+        name="employees-average-salary-per-years-of-experience"
+    ),
+    path(
+        "analytical/employees-average-salary-per-gender",
+        EmployeesAverageSalaryPerGender.as_view(),
+        name="employees-average-salary-per-gender"
+    ),
+    path(
+        "analytical/employees-average-age-per-gender",
+        EmployeesAverageAgePerGender.as_view(),
+        name="employees-average-age-per-gender"
+    )
 ]

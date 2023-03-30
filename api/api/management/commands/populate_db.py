@@ -5,7 +5,7 @@ from django.core.management.base import BaseCommand
 
 from api.models import Employee
 
-DATA_FILE = "api/management/commands/db_data/initial_data.json"
+DATA_FILE = "api/db_data/initial_data.json"
 
 
 class Command(BaseCommand):

@@ -1,5 +1,5 @@
 from django.db import models
-
+import pandas as pd
 
 class Employee(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -16,3 +16,9 @@ class Employee(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    @classmethod
+    def get_all_as_pandas_df(cls) -> pd.DataFrame:
+        employees = cls.objects.all()
+        return pd.DataFrame(list(employees.values()))
+

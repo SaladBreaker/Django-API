@@ -39,5 +39,12 @@ python manage.py populate_db
 ## Run
 To start the server use:
 ```shell
+python manage.py runserver
+```
 
+
+## Tests
+To run the tests use: 
+```shell
+python manage.py test api.tests 
 ```
