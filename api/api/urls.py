@@ -16,11 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from .views import EmployeeList
+from .views import EmployeeListView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
 
     # Employee
-    path('employees/', EmployeeList.as_view()),
+    path('employees/', EmployeeListView.as_view(), name='employee-list'),
 ]

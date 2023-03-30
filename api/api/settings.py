@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "api",
 
     "rest_framework",
+    "django_filters",
 
     "django.contrib.admin",
     "django.contrib.auth",
