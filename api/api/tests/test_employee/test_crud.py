@@ -65,7 +65,6 @@ class EmployeeCreateTestCase(TestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-
     def test_when_user_exists(self):
         self.employee.save()
 
@@ -123,7 +122,7 @@ class EmployeeUpdateTestCase(TestCase):
         self.assertEqual(response.data, serialized_data)
 
 
-class EmployeeUpdateTestCase(TestCase):
+class EmployeeDeleteTestCase(TestCase):
     def setUp(self):
         self.client = APIClient()
 

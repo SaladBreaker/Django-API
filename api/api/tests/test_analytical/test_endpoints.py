@@ -144,11 +144,11 @@ class AnalyticalAverageSalaryPerYearsOfExperience(TestCase):
         )
         update_df()
 
-
     def test_base_case(self):
-        response = self.client.get(reverse("employees-average-salary-per-years-of-experience"))
+        response = self.client.get(
+            reverse("employees-average-salary-per-years-of-experience")
+        )
 
-        print(response.data)
         self.assertEqual(response.data["4.0"], 50000)
 
 

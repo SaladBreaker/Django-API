@@ -33,6 +33,7 @@ def get_df() -> pd.DataFrame:
 
 # Employees endpoints
 
+
 class EmployeeListView(ListAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
@@ -104,20 +105,21 @@ class EmployeeDeleteView(APIView):
 
 # Analytical Endpoints
 
+
 class EmployeesAverageAgePerIndustry(APIView):
     def get(self, request):
         df = get_df()
 
-        df['date_of_birth'] = pd.to_datetime(df['date_of_birth'])
+        df["date_of_birth"] = pd.to_datetime(df["date_of_birth"])
 
-        df = df[df['date_of_birth'].notnull()]
-        df = df[df['industry'].notnull()]
-        df = df[df['industry'] != '']
+        df = df[df["date_of_birth"].notnull()]
+        df = df[df["industry"].notnull()]
+        df = df[df["industry"] != ""]
 
         # .astype('<m8[Y]') ignores the month and day of the result
-        df['age'] = (pd.Timestamp('now') - df['date_of_birth']).astype('<m8[Y]')
+        df["age"] = (pd.Timestamp("now") - df["date_of_birth"]).astype("<m8[Y]")
 
-        result = df.groupby('industry')['age'].mean()
+        result = df.groupby("industry")["age"].mean()
         result = result.to_json()
 
         return Response(json.loads(result), status=status.HTTP_200_OK)
@@ -127,11 +129,11 @@ class EmployeesAverageSalaryPerIndustry(APIView):
     def get(self, request):
         df = get_df()
 
-        df = df[df['salary'].notnull()]
-        df = df[df['industry'].notnull()]
-        df = df[df['industry'] != '']
+        df = df[df["salary"].notnull()]
+        df = df[df["industry"].notnull()]
+        df = df[df["industry"] != ""]
 
-        result = df.groupby('industry')['salary'].mean()
+        result = df.groupby("industry")["salary"].mean()
         result = result.to_json()
 
         return Response(json.loads(result), status=status.HTTP_200_OK)
@@ -141,10 +143,10 @@ class EmployeesAverageSalaryPerYearsOfExperience(APIView):
     def get(self, request):
         df = get_df()
 
-        df = df[df['salary'].notnull()]
-        df = df[df['years_of_experience'].notnull()]
+        df = df[df["salary"].notnull()]
+        df = df[df["years_of_experience"].notnull()]
 
-        result = df.groupby('years_of_experience')['salary'].mean()
+        result = df.groupby("years_of_experience")["salary"].mean()
         result = result.to_json()
 
         return Response(json.loads(result), status=status.HTTP_200_OK)
@@ -154,10 +156,10 @@ class EmployeesAverageSalaryPerGender(APIView):
     def get(self, request):
         df = get_df()
 
-        df = df[df['salary'].notnull()]
-        df = df[df['gender'].notnull()]
+        df = df[df["salary"].notnull()]
+        df = df[df["gender"].notnull()]
 
-        result = df.groupby('gender')['salary'].mean()
+        result = df.groupby("gender")["salary"].mean()
         result = result.to_json()
 
         return Response(json.loads(result), status=status.HTTP_200_OK)
@@ -167,15 +169,15 @@ class EmployeesAverageAgePerGender(APIView):
     def get(self, request):
         df = get_df()
 
-        df['date_of_birth'] = pd.to_datetime(df['date_of_birth'])
+        df["date_of_birth"] = pd.to_datetime(df["date_of_birth"])
 
-        df = df[df['date_of_birth'].notnull()]
-        df = df[df['gender'].notnull()]
+        df = df[df["date_of_birth"].notnull()]
+        df = df[df["gender"].notnull()]
 
         # .astype('<m8[Y]') ignores the month and day of the result
-        df['age'] = (pd.Timestamp('now') - df['date_of_birth']).astype('<m8[Y]')
+        df["age"] = (pd.Timestamp("now") - df["date_of_birth"]).astype("<m8[Y]")
 
-        result = df.groupby('gender')['age'].mean()
+        result = df.groupby("gender")["age"].mean()
         result = result.to_json()
 
         return Response(json.loads(result), status=status.HTTP_200_OK)

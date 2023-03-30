@@ -1,6 +1,7 @@
 from django.db import models
 import pandas as pd
 
+
 class Employee(models.Model):
     id = models.IntegerField(primary_key=True)
     first_name = models.CharField(max_length=300)
@@ -21,4 +22,3 @@ class Employee(models.Model):
     def get_all_as_pandas_df(cls) -> pd.DataFrame:
         employees = cls.objects.all()
         return pd.DataFrame(list(employees.values()))
-
