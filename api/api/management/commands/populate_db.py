@@ -1,6 +1,5 @@
-from datetime import datetime
-
 import pandas as pd
+import numpy as np
 
 from django.core.management.base import BaseCommand
 
@@ -20,6 +19,7 @@ class Command(BaseCommand):
 
         df['date_of_birth'] = pd.to_datetime(df['date_of_birth'])
         df = df.replace(['NaN', 'n/a'], [None, None])
+        df = df.replace(np.nan, None, regex=True)
 
         for index, row in df.iterrows():
             Employee(

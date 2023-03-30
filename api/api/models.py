@@ -9,8 +9,8 @@ class Employee(models.Model):
     gender = models.CharField(max_length=10, null=True)
     date_of_birth = models.DateField()
     industry = models.CharField(max_length=300, null=True)
-    salary = models.FloatField()
-    years_of_experience = models.FloatField()
+    salary = models.FloatField(null=True)
+    years_of_experience = models.FloatField(null=True)
 
     others = models.JSONField(default=dict, null=True)
 
