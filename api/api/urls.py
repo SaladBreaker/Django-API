@@ -16,11 +16,33 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from .views import EmployeeListView
+from .views import (
+    EmployeeListView,
+    EmployeeGetView,
+    EmployeePostView,
+    EmployeePutView,
+    EmployeeDeleteView,
+)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-
     # Employee
-    path('employees/', EmployeeListView.as_view(), name='employee-list'),
+    # TODO why /<verb> and not directly /
+    path("employees/", EmployeeListView.as_view(), name="employees-list"),
+    path("employees/<int:id>/", EmployeeGetView.as_view(), name="employees-get"),
+    path(
+        "employees/create/",
+        EmployeePostView.as_view(http_method_names=["post"]),
+        name="employees-create",
+    ),
+    path(
+        "employees/<int:id>/update/",
+        EmployeePutView.as_view(http_method_names=["put"]),
+        name="employees-update",
+    ),
+    path(
+        "employees/<int:id>/delete/",
+        EmployeeDeleteView.as_view(http_method_names=["delete"]),
+        name="employees-delete",
+    ),
 ]

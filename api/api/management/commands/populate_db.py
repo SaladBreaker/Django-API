@@ -17,8 +17,8 @@ class Command(BaseCommand):
 
         df = pd.read_json(data_json)
 
-        df['date_of_birth'] = pd.to_datetime(df['date_of_birth'])
-        df = df.replace(['NaN', 'n/a'], [None, None])
+        df["date_of_birth"] = pd.to_datetime(df["date_of_birth"])
+        df = df.replace(["NaN", "n/a"], [None, None])
         df = df.replace(np.nan, None, regex=True)
 
         for index, row in df.iterrows():
@@ -33,4 +33,3 @@ class Command(BaseCommand):
                 salary=row["salary"],
                 years_of_experience=row["years_of_experience"],
             ).save()
-
